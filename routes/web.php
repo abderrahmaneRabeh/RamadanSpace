@@ -33,3 +33,7 @@ Route::get('/register', action: function () {
     return view('register');
 });
 
+Route::get('/Experiences', action: function () {
+    return view('Experiences');
+});
+
