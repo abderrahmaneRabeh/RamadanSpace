@@ -61,7 +61,7 @@
     <nav class="fixed w-full bg-opacity-90 bg-dark-green z-50 border-b border-gold border-opacity-20">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <div class="text-gold text-2xl font-bold">Ramadan Kareem</div>
+                <a href="/" class="text-2xl text-white font-bold">Ramadan<span class="text-gold">Space</span></a>
                 <div class="hidden md:flex space-x-8">
                     <a href="#accueil" class="text-white hover:text-gold transition">Accueil</a>
                     <a href="#experiences" class="text-white hover:text-gold transition">Expériences</a>
@@ -89,10 +89,10 @@
                 <button class="bg-gold text-dark-green px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition">
                     Partager votre expérience
                 </button>
-                <button
+                <a href="/Recettes"
                     class="border-2 border-gold text-gold px-8 py-4 rounded-full font-bold hover:bg-gold hover:text-dark-green transition">
                     Explorer les recettes
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -109,7 +109,7 @@
                     <p class="text-gray-300">Une expérience spirituelle unique partagée par Ahmed...</p>
                     <div class="mt-4 flex justify-between items-center">
                         <span class="text-gold text-sm">Il y a 2 jours</span>
-                        <button class="text-gold hover:underline">Lire plus</button>
+                        <a href="/ExDetails" class="text-gold hover:underline">Lire plus</a>
                     </div>
                 </div>
 
@@ -134,6 +134,11 @@
                         <button class="text-gold hover:underline">Lire plus</button>
                     </div>
                 </div>
+            </div>
+            <div class="text-center mt-16">
+                <a href="/Experiences"
+                    class="bg-gold text-dark-green px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition">Voir
+                    toutes les expériences</a>
             </div>
         </div>
     </section>
@@ -184,6 +189,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="text-center mt-16">
+                <a href="/Recettes"
+                    class="bg-gold text-dark-green px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition">Voir
+                    toutes les recettes</a>
             </div>
         </div>
     </section>
