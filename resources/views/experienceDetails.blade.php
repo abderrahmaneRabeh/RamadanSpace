@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premier jour de Ramadan - Expérience</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="https://static.thenounproject.com/png/3188217-512.png">
     <style>
         :root {
             --primary-gold: #D4AF37;
@@ -44,15 +45,27 @@
 
 <body class="bg-pattern min-h-screen">
     <!-- Navbar (similaire à la page d'accueil) -->
-    <nav class="bg-dark-green bg-opacity-90 border-b border-gold border-opacity-20 mb-8">
+    <nav class="fixed w-full bg-opacity-90 bg-dark-green z-50 border-b border-gold border-opacity-20">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <a href="/" class="text-2xl text-white font-bold">Ramadan<span class="text-gold">Space</span></a>
                 <div class="hidden md:flex space-x-8">
-                    <a href="/" class="text-white hover:text-gold transition">Accueil</a>
-                    <a href="#" class="text-white hover:text-gold transition">Expériences</a>
-                    <a href="#" class="text-white hover:text-gold transition">Recettes</a>
+                    <a href="#accueil" class="text-white hover:text-gold transition">Accueil</a>
+                    <a href="/Experiences" class="text-gold hover:text-gold transition">Expériences</a>
+                    <a href="/Recettes" class="text-white hover:text-gold transition">Recettes</a>
                 </div>
+                @auth
+                    <a href="/profile"
+                        class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                        {{ Auth::user()->name }}
+                    </a>
+                @else
+                    <a href="/login"
+                        class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                        Connexion
+                    </a>
+                @endauth
+
             </div>
         </div>
     </nav>
@@ -60,7 +73,7 @@
     <!-- Contenu Principal -->
     <main class="container mx-auto px-6 py-8">
         <!-- En-tête de l'article -->
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto mt-32">
             <div class="mb-8">
                 <h1 class="text-4xl font-bold text-gold mb-4">Premier jour de Ramadan : Une expérience spirituelle</h1>
                 <div class="flex items-center space-x-4 text-gray-300 mb-6">

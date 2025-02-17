@@ -40,8 +40,19 @@
 <body class="bg-pattern min-h-screen flex items-center justify-center">
     <div class="container mx-auto px-6">
         <div class="max-w-md mx-auto bg-white bg-opacity-5 rounded-xl p-8 border border-gold border-opacity-20">
+            @if (session('success'))
+                <h1 style="color: rgb(255, 255, 255);">{{ session('success') }}</h1>
+            @endif
+            @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li style="color: red;">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+
             <h2 class="text-3xl font-bold text-gold text-center mb-8">Inscription</h2>
-            <form>
+            <form action="{{ route('register') }}" method="POST">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="block text-gold mb-2">Nom complet</label>
@@ -62,10 +73,10 @@
                     <p id="password-error" class="mt-2 text-red-600 text-sm"></p>
                 </div>
                 <div class="mb-6">
-                    <label for="confirm-password" class="block text-gold mb-2">Confirmer le mot de passe</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required
+                    <label for="password_confirmation" class="block text-gold mb-2">Confirmer le mot de passe</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required
                         class="w-full px-4 py-2 rounded-full bg-white bg-opacity-10 text-white border-gold border focus:outline-none">
-                    <p id="confirm-password-error" class="mt-2 text-red-600 text-sm"></p>
+                    <p id="password_confirmation-error" class="mt-2 text-red-600 text-sm"></p>
                 </div>
                 <button type="submit"
                     class="w-full bg-gold text-dark-green px-6 py-3 rounded-full font-bold hover:bg-opacity-90 transition">
@@ -83,9 +94,9 @@
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('input', () => {
                 if (input.name === 'name') {
-                    if (!input.value.match(/^[a-zA-Z]+$/)) {
+                    if (!input.value.match(/^[a-zA-Z\s]+$/)) {
                         document.querySelector('#name-error').textContent =
-                            'Le nom ne doit contenir que des lettres';
+                            'Le nom ne doit contenir que des lettres et des espaces';
                     } else {
                         document.querySelector('#name-error').textContent = '';
                     }
@@ -102,8 +113,7 @@
                 }
 
                 if (input.name === 'password') {
-                    if (!input.value.match(
-                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)) {
+                    if (input.value.length < 8) {
                         document.querySelector('#password-error').textContent =
                             'Le mot de passe doit contenir au moins 8 caractères';
                     } else {
@@ -111,13 +121,13 @@
                     }
                 }
 
-                if (input.name === 'confirm-password') {
-                    if (input.value !== document.querySelector('input[name=password]')
+                if (input.name === 'password_confirmation') {
+                    if (input.value != document.querySelector('input[name=password]')
                         .value) {
-                        document.querySelector('#confirm-password-error').textContent =
+                        document.querySelector('#password_confirmation-error').textContent =
                             'Les mots de passe ne correspondent pas';
                     } else {
-                        document.querySelector('#confirm-password-error').textContent = '';
+                        document.querySelector('#password_confirmation-error').textContent = '';
                     }
                 }
             });

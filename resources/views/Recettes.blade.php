@@ -7,6 +7,7 @@
     <title>Recettes Ramadan 2025</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="icon" href="https://static.thenounproject.com/png/3188217-512.png">
     <style>
         :root {
             --primary-gold: #D4AF37;
@@ -64,10 +65,17 @@
                     <a href="/Experiences" class="text-white transition">Expériences</a>
                     <a href="/Recettes" class="text-gold hover:text-gold transition">Recettes</a>
                 </div>
-                <a href="/login"
-                    class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
-                    Connexion
-                </a>
+                @auth
+                    <a href="/profile"
+                        class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                        {{ Auth::user()->name }}
+                    </a>
+                @else
+                    <a href="/login"
+                        class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                        Connexion
+                    </a>
+                @endauth
             </div>
         </div>
     </nav>

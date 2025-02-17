@@ -7,6 +7,7 @@
     <title>Ramadan 2025 - Code Shogun</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="icon" href="https://static.thenounproject.com/png/3188217-512.png">
     <style>
         :root {
             --primary-gold: #D4AF37;
@@ -67,13 +68,22 @@
                     <a href="#experiences" class="text-white hover:text-gold transition">Expériences</a>
                     <a href="#recettes" class="text-white hover:text-gold transition">Recettes</a>
                 </div>
-                <a href="/login"
-                    class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
-                    Connexion
-                </a>
+                @auth
+                    <a href="/profile"
+                        class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                        {{ Auth::user()->name }}
+                    </a>
+                @else
+                    <a href="/login"
+                        class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                        Connexion
+                    </a>
+                @endauth
+
             </div>
         </div>
     </nav>
+
 
     <!-- Hero Section -->
     <section id="accueil" class="min-h-screen flex items-center justify-center hero-gradient">
@@ -243,7 +253,7 @@
     <script>
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
