@@ -42,25 +42,30 @@
         <div class="max-w-md mx-auto bg-white bg-opacity-5 rounded-xl p-8 border border-gold border-opacity-20">
             <h2 class="text-3xl font-bold text-gold text-center mb-8">Inscription</h2>
             <form>
+                @csrf
                 <div class="mb-6">
                     <label for="name" class="block text-gold mb-2">Nom complet</label>
                     <input type="text" id="name" name="name" required
                         class="w-full px-4 py-2 rounded-full bg-white bg-opacity-10 text-white border-gold border focus:outline-none">
+                    <p id="name-error" class="mt-2 text-red-600 text-sm"></p>
                 </div>
                 <div class="mb-6">
                     <label for="email" class="block text-gold mb-2">Email</label>
                     <input type="email" id="email" name="email" required
                         class="w-full px-4 py-2 rounded-full bg-white bg-opacity-10 text-white border-gold border focus:outline-none">
+                    <p id="email-error" class="mt-2 text-red-600 text-sm"></p>
                 </div>
                 <div class="mb-6">
                     <label for="password" class="block text-gold mb-2">Mot de passe</label>
                     <input type="password" id="password" name="password" required
                         class="w-full px-4 py-2 rounded-full bg-white bg-opacity-10 text-white border-gold border focus:outline-none">
+                    <p id="password-error" class="mt-2 text-red-600 text-sm"></p>
                 </div>
                 <div class="mb-6">
                     <label for="confirm-password" class="block text-gold mb-2">Confirmer le mot de passe</label>
                     <input type="password" id="confirm-password" name="confirm-password" required
                         class="w-full px-4 py-2 rounded-full bg-white bg-opacity-10 text-white border-gold border focus:outline-none">
+                    <p id="confirm-password-error" class="mt-2 text-red-600 text-sm"></p>
                 </div>
                 <button type="submit"
                     class="w-full bg-gold text-dark-green px-6 py-3 rounded-full font-bold hover:bg-opacity-90 transition">
@@ -75,7 +80,48 @@
     </div>
 
     <script>
-        // You can add form validation and submission logic here
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.name === 'name') {
+                    if (!input.value.match(/^[a-zA-Z]+$/)) {
+                        document.querySelector('#name-error').textContent =
+                            'Le nom ne doit contenir que des lettres';
+                    } else {
+                        document.querySelector('#name-error').textContent = '';
+                    }
+                }
+
+                if (input.name === 'email') {
+                    if (!input.value.match(
+                            /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+                        document.querySelector('#email-error').textContent =
+                            'L\'email est invalide';
+                    } else {
+                        document.querySelector('#email-error').textContent = '';
+                    }
+                }
+
+                if (input.name === 'password') {
+                    if (!input.value.match(
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)) {
+                        document.querySelector('#password-error').textContent =
+                            'Le mot de passe doit contenir au moins 8 caractères';
+                    } else {
+                        document.querySelector('#password-error').textContent = '';
+                    }
+                }
+
+                if (input.name === 'confirm-password') {
+                    if (input.value !== document.querySelector('input[name=password]')
+                        .value) {
+                        document.querySelector('#confirm-password-error').textContent =
+                            'Les mots de passe ne correspondent pas';
+                    } else {
+                        document.querySelector('#confirm-password-error').textContent = '';
+                    }
+                }
+            });
+        });
     </script>
 </body>
 

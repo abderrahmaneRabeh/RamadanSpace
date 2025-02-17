@@ -42,15 +42,18 @@
         <div class="max-w-md mx-auto bg-white bg-opacity-5 rounded-xl p-8 border border-gold border-opacity-20">
             <h2 class="text-3xl font-bold text-gold text-center mb-8">Connexion</h2>
             <form>
+                @csrf
                 <div class="mb-6">
                     <label for="email" class="block text-gold mb-2">Email</label>
                     <input type="email" id="email" name="email" required
                         class="w-full px-4 py-2 rounded-full bg-white bg-opacity-10 text-white border-gold border focus:outline-none">
+                    <p id="email-error" class="mt-2 text-red-600 text-sm"></p>
                 </div>
                 <div class="mb-6">
                     <label for="password" class="block text-gold mb-2">Mot de passe</label>
                     <input type="password" id="password" name="password" required
                         class="w-full px-4 py-2 rounded-full bg-white bg-opacity-10 text-white border-gold border focus:outline-none">
+                    <p id="password-error" class="mt-2 text-red-600 text-sm"></p>
                 </div>
                 <button type="submit"
                     class="w-full bg-gold text-dark-green px-6 py-3 rounded-full font-bold hover:bg-opacity-90 transition">
@@ -65,7 +68,33 @@
     </div>
 
     <script>
-        // You can add form validation and submission logic here
+        document.querySelector('form').addEventListener('submit', function(event) {
+            let valid = true;
+            const email = document.getElementById('email');
+            const emailError = document.getElementById('email-error');
+            const password = document.getElementById('password');
+            const passwordError = document.getElementById('password-error');
+
+            // Email validation
+            if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value)) {
+                valid = false;
+                emailError.textContent = 'Veuillez entrer un email valide.';
+            } else {
+                emailError.textContent = '';
+            }
+
+            // Password validation (example: at least 6 characters)
+            if (password.value.length < 6) {
+                valid = false;
+                passwordError.textContent = 'Le mot de passe doit contenir au moins 6 caractères.';
+            } else {
+                passwordError.textContent = '';
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
     </script>
 </body>
 

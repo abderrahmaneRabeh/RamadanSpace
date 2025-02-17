@@ -63,14 +63,14 @@
             <div class="flex justify-between items-center">
                 <a href="/" class="text-2xl text-white font-bold">Ramadan<span class="text-gold">Space</span></a>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#accueil" class="text-white hover:text-gold transition">Accueil</a>
+                    <a href="#accueil" class="text-gold hover:text-gold transition">Accueil</a>
                     <a href="#experiences" class="text-white hover:text-gold transition">Expériences</a>
                     <a href="#recettes" class="text-white hover:text-gold transition">Recettes</a>
-                    <a href="#contact" class="text-white hover:text-gold transition">Contact</a>
                 </div>
-                <button class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                <a href="/login"
+                    class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
                     Connexion
-                </button>
+                </a>
             </div>
         </div>
     </nav>
@@ -86,9 +86,10 @@
                 et découvrir des recettes traditionnelles pendant ce mois sacré
             </p>
             <div class="flex flex-col md:flex-row justify-center gap-4 animate__animated animate__fadeInUp">
-                <button class="bg-gold text-dark-green px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition">
+                <a href="/Experiences"
+                    class="bg-gold text-dark-green px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition">
                     Partager votre expérience
-                </button>
+                </a>
                 <a href="/Recettes"
                     class="border-2 border-gold text-gold px-8 py-4 rounded-full font-bold hover:bg-gold hover:text-dark-green transition">
                     Explorer les recettes

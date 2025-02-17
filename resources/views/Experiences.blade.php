@@ -64,11 +64,10 @@
                 <a href="/" class="text-2xl text-white font-bold">Ramadan<span class="text-gold">Space</span></a>
                 <div class="hidden md:flex space-x-8">
                     <a href="/" class="text-white hover:text-gold transition">Accueil</a>
-                    <a href="#" class="text-gold transition">Expériences</a>
-                    <a href="#" class="text-white hover:text-gold transition">Recettes</a>
-                    <a href="#" class="text-white hover:text-gold transition">Contact</a>
+                    <a href="/Experiences" class="text-gold transition">Expériences</a>
+                    <a href="/Recettes" class="text-white hover:text-gold transition">Recettes</a>
                 </div>
-                <a href="login.html"
+                <a href="/login"
                     class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
                     Connexion
                 </a>

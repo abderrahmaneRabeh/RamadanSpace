@@ -55,21 +55,26 @@
 
 <body class="bg-pattern min-h-screen">
     <!-- Navbar -->
-    <nav class="bg-dark-green bg-opacity-90 border-b border-gold border-opacity-20">
+    <nav class="fixed w-full bg-opacity-90 bg-dark-green z-50 border-b border-gold border-opacity-20">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <a href="/" class="text-2xl text-white font-bold">Ramadan<span class="text-gold">Space</span></a>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#" class="text-white hover:text-gold transition">Accueil</a>
-                    <a href="#" class="text-white hover:text-gold transition">Recettes</a>
+                    <a href="/" class="text-white hover:text-gold transition">Accueil</a>
+                    <a href="/Experiences" class="text-white transition">Expériences</a>
+                    <a href="/Recettes" class="text-gold hover:text-gold transition">Recettes</a>
                 </div>
+                <a href="/login"
+                    class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                    Connexion
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Header Section -->
     <header class="container mx-auto px-6 py-12 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Recettes du Ramadan</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-20">Recettes du Ramadan</h1>
         <p class="text-gray-300 max-w-2xl mx-auto mb-8">
             Découvrez nos délicieuses recettes traditionnelles pour le Ramadan,
             des entrées aux desserts, parfaites pour l'Iftar et le Suhoor.
