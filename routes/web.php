@@ -26,7 +26,8 @@ Route::get('/Recettes', function () {
     return view('Recettes');
 });
 
-Route::get('/login', [AuthController::class, 'showLoginForm']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -39,3 +40,9 @@ Route::get(
         return view('Experiences');
     },
 );
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');

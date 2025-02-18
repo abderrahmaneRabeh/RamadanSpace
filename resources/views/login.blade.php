@@ -41,7 +41,7 @@
     <div class="container mx-auto px-6">
         <div class="max-w-md mx-auto bg-white bg-opacity-5 rounded-xl p-8 border border-gold border-opacity-20">
             <h2 class="text-3xl font-bold text-gold text-center mb-8">Connexion</h2>
-            <form>
+            <form method="post" action="{{ route('login') }}">
                 @csrf
                 <div class="mb-6">
                     <label for="email" class="block text-gold mb-2">Email</label>
@@ -68,7 +68,7 @@
     </div>
 
     <script>
-        document.querySelector('form').addEventListener('submit', function(event) {
+        document.querySelector('form').addEventListener('submit', function (event) {
             let valid = true;
             const email = document.getElementById('email');
             const emailError = document.getElementById('email-error');

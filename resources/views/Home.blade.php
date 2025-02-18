@@ -69,10 +69,32 @@
                     <a href="#recettes" class="text-white hover:text-gold transition">Recettes</a>
                 </div>
                 @auth
-                    <a href="/profile"
-                        class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
-                        {{ Auth::user()->name }}
-                    </a>
+                    <div class="relative inline-block text-left">
+                        <button onclick="toggleDropdown()"
+                            class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition flex items-center">
+                            {{ Auth::user()->name }} <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="dropdownMenu"
+                            class="hidden absolute right-0 mt-2 w-56 origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a href="/profile" class="block px-4 py-2 text-sm text-dark-green hover:bg-gray-100"
+                                    role="menuitem">Profile</a>
+                                <a href="/logout" class="block px-4 py-2 text-sm text-dark-green hover:bg-gray-100"
+                                    role="menuitem">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        function toggleDropdown() {
+                            var dropdown = document.getElementById('dropdownMenu');
+                            dropdown.classList.toggle('hidden');
+                        }
+                    </script>
                 @else
                     <a href="/login"
                         class="bg-gold text-dark-green px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
