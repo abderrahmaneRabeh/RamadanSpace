@@ -92,6 +92,29 @@
         </div>
     </nav>
 
+    @if (session('success'))
+        <div id="success-notification"
+            class="fixed top-24 right-0 transform translate-x-full bg-green-600 text-white px-6 py-4 rounded-l-lg shadow-lg border-l-4 border-gold flex items-center z-50 transition-transform duration-500 ease-out">
+            <div class="text-gold mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <div>
+                <p class="font-bold">Succès!</p>
+                <p>{{ session('success') }}</p>
+            </div>
+            <button onclick="closeNotification()" class="ml-6 text-white hover:text-gold focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+    @endif
+
     <!-- Contenu Principal -->
     <main class="container mx-auto px-6 py-8">
         <!-- En-tête de l'article -->
@@ -133,7 +156,7 @@
                 <div class="flex items-center space-x-4">
                     <button class="flex items-center space-x-2 text-gold">
                         <span>💬</span>
-                        <span>2 commentaires</span>
+                        <span>{{ $commentaires->count() }} commentaires</span>
                     </button>
                 </div>
                 <button class="flex items-center space-x-2 text-gold">
@@ -146,58 +169,69 @@
             <section class="mt-12">
 
                 <!-- Formulaire de commentaire -->
-                <div class="mb-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="flex-1">
-                            <textarea
-                                class="w-full p-4 rounded-xl bg-white bg-opacity-5 border border-gold border-opacity-20 text-white focus:outline-none focus:border-gold"
-                                placeholder="Partagez votre réaction..." rows="3"></textarea>
-                            <button
-                                class="mt-2 px-6 py-2 bg-gold text-dark-green rounded-full font-medium hover:bg-opacity-90">
-                                Commenter
-                            </button>
+                <form action="{{ route('AjouterCommentaire') }}" method="POST">
+                    @csrf
+                    <div class="mb-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-1">
+                                <textarea
+                                    class="w-full p-4 rounded-xl bg-white bg-opacity-5 border border-gold border-opacity-20 text-white focus:outline-none focus:border-gold"
+                                    placeholder="Partagez votre réaction..." name="commentaire" rows="3"></textarea>
+                                <input type="hidden" name="publication_id" value="{{ $publication->id_pub }}">
+                                <button type="submit"
+                                    class="mt-2 px-6 py-2 bg-gold text-dark-green rounded-full font-medium hover:bg-opacity-90">
+                                    Commenter
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Liste des commentaires -->
                 <div class="space-y-6">
-                    <!-- Commentaire 1 -->
-                    <div class="flex space-x-4">
-                        <div class="flex-1">
-                            <div class="bg-white bg-opacity-5 rounded-xl p-4 border border-gold border-opacity-20">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-bold text-gold">Karim</h4>
-                                    <span class="text-sm text-gray-400">Il y a 2 heures</span>
-                                </div>
-                                <p class="text-gray-300">Merci pour ce beau partage ! J'ai vécu exactement les mêmes
-                                    émotions lors de mon premier jour...</p>
-                                <div class="mt-2 flex items-center space-x-4 text-sm text-gold">
-                                    <button class="hover:underline">Répondre</button>
+                    @foreach ($commentaires as $commentaire)
+                        <div class="flex space-x-4">
+                            <div class="flex-1">
+                                <div class="bg-white bg-opacity-5 rounded-xl p-4 border border-gold border-opacity-20">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-bold text-gold">{{ $commentaire->user->name }}</h4>
+                                        <span
+                                            class="text-sm text-gray-400">{{ $commentaire->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <p class="text-gray-300">{{ $commentaire->contenu }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
-                    <!-- Commentaire 2 -->
-                    <div class="flex space-x-4">
-                        <div class="flex-1 bg-white bg-opacity-5 rounded-xl p-4 border border-gold border-opacity-20">
-                            <div class="flex justify-between items-start mb-2">
-                                <h4 class="font-bold text-gold">Amina</h4>
-                                <span class="text-sm text-gray-400">Il y a 3 heures</span>
-                            </div>
-                            <p class="text-gray-300">Très belle description de ce moment spirituel. J'apprécie
-                                particulièrement la partie sur la préparation...</p>
-                            <div class="mt-2 flex items-center space-x-4 text-sm text-gold">
-                                <button class="hover:underline">Répondre</button>
-                                <button class="hover:underline">❤️ 8</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
         </div>
     </main>
+    <script>
+        // Animation d'entrée depuis la droite
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                const notification = document.getElementById('success-notification');
+                notification.classList.remove('translate-x-full');
+            }, 100);
+
+            // Fermeture automatique après 5 secondes
+            setTimeout(function () {
+                closeNotification();
+            }, 5000);
+        });
+
+        function closeNotification() {
+            const notification = document.getElementById('success-notification');
+            notification.classList.add('translate-x-full');
+
+            // Supprimer complètement après la transition
+            setTimeout(function () {
+                notification.remove();
+            }, 500);
+        }
+    </script>
 </body>
 
 </html>

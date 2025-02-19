@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ExperienceController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +47,6 @@ Route::get('/profile', function () {
 
 Route::get('/experience/create', [ExperienceController::class, 'index'])->name('add_experience');
 Route::post('/experience/create', [ExperienceController::class, 'store']);
+
+
+Route::post('/AjouterCommentaire', [CommentaireController::class, 'store'])->name('AjouterCommentaire');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commentaire;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class ExperienceController extends Controller
     public function showDetails($id)
     {
         $publication = Publication::with('user')->findOrFail($id);
-        return view('experienceDetails', compact('publication'));
+        $commentaires = Commentaire::where('id_pub', $id)->orderBy('created_at', 'desc')->get();
+        return view('experienceDetails', compact('publication', 'commentaires'));
     }
     public function index()
     {
