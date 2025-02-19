@@ -7,6 +7,19 @@ use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
 {
+
+    public function display()
+    {
+        $publications = Publication::with('user')->get();
+
+        return view('Experiences', compact('publications'));
+    }
+
+    public function showDetails($id)
+    {
+        $publication = Publication::with('user')->findOrFail($id);
+        return view('experienceDetails', compact('publication'));
+    }
     public function index()
     {
         return view('AjouterExperience');

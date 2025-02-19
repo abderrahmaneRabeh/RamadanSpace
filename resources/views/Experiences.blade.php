@@ -151,79 +151,21 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Experience Card 1 -->
-                <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">📝</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Premier Jour de Ramadan</h3>
-                    <p class="text-gray-300 mb-4">Une expérience spirituelle unique partagée par Ahmed. Le premier jour
-                        du Ramadan est toujours spécial, rempli d'anticipation et de renouveau spirituel...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 2 jours</span>
-                        <a href="#" class="text-gold hover:underline">Lire plus</a>
+                @foreach ($publications as $pub)
+                    <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
+                        <div class="text-gold text-4xl mb-4">📝</div>
+                        <h3 class="text-gold text-xl font-bold mb-4">{{ $pub->title_pub }}</h3>
+                        <p class="text-gray-300 mb-4">{{ Str::limit($pub->description, 100) }}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gold text-sm">{{ $pub->user->name }}</span>
+                            <a href="ExDetails/{{ $pub->id_pub }}" class="text-gold hover:underline">Lire
+                                plus</a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Experience Card 2 -->
-                <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">🌙</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Nuit du Destin</h3>
-                    <p class="text-gray-300 mb-4">Témoignage spirituel sur la Laylat al-Qadr. Cette nuit sacrée est
-                        considérée comme la plus importante du Ramadan, où les prières sont particulièrement
-                        puissantes...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 3 jours</span>
-                        <a href="#" class="text-gold hover:underline">Lire plus</a>
-                    </div>
-                </div>
+                @endforeach
 
-                <!-- Experience Card 3 -->
-                <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">🕌</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Prière en Communauté</h3>
-                    <p class="text-gray-300 mb-4">L'importance des prières de Tarawih. Ces prières nocturnes spéciales
-                        pendant le Ramadan renforcent le sens de la communauté et approfondissent la connexion
-                        spirituelle...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 4 jours</span>
-                        <a href="#" class="text-gold hover:underline">Lire plus</a>
-                    </div>
-                </div>
 
-                <!-- Experience Card 4 -->
-                <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">🍽️</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Iftar en Famille</h3>
-                    <p class="text-gray-300 mb-4">Le moment précieux de la rupture du jeûne en famille. L'iftar est un
-                        moment de joie, de partage et de gratitude, renforçant les liens familiaux...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 5 jours</span>
-                        <a href="#" class="text-gold hover:underline">Lire plus</a>
-                    </div>
-                </div>
-
-                <!-- Experience Card 5 -->
-                <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">🤲</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Actes de Charité</h3>
-                    <p class="text-gray-300 mb-4">L'importance de la générosité pendant le Ramadan. De nombreux
-                        musulmans intensifient leurs actes de charité pendant ce mois sacré, aidant ceux dans le
-                        besoin...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 6 jours</span>
-                        <a href="#" class="text-gold hover:underline">Lire plus</a>
-                    </div>
-                </div>
-
-                <!-- Experience Card 6 -->
-                <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">📖</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Lecture du Coran</h3>
-                    <p class="text-gray-300 mb-4">L'expérience enrichissante de la lecture quotidienne du Coran.
-                        Beaucoup cherchent à compléter la lecture de l'intégralité du Coran pendant le Ramadan...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 7 jours</span>
-                        <a href="#" class="text-gold hover:underline">Lire plus</a>
-                    </div>
-                </div>
             </div>
 
             <!-- Pagination -->

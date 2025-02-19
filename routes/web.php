@@ -19,9 +19,7 @@ Route::get('/', function () {
     return view('Home');
 })->name('home');
 
-Route::get('/ExDetails', function () {
-    return view('experienceDetails');
-});
+Route::get('/ExDetails/{id}', [ExperienceController::class, 'showDetails'])->name('ex_details');
 
 Route::get('/Recettes', function () {
     return view('Recettes');
@@ -37,9 +35,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::get(
     '/Experiences',
-    action: function () {
-        return view('Experiences');
-    },
+    [ExperienceController::class, 'display'],
 )->name('Experiences');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
