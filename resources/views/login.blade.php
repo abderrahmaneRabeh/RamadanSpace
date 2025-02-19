@@ -38,6 +38,29 @@
 </head>
 
 <body class="bg-pattern min-h-screen flex items-center justify-center">
+
+    @if (session('error'))
+        <div id="error-notification"
+            class="fixed top-24 right-0 transform translate-x-full bg-red-600 text-white px-6 py-4 rounded-l-lg shadow-lg border-l-4 border-red-800 flex items-center z-50 transition-transform duration-500 ease-out">
+            <div class="text-red-800 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+            <div>
+                <p class="font-bold">Erreur!</p>
+                <p>{{ session('error') }}</p>
+            </div>
+            <button onclick="closeNotification()" class="ml-6 text-white hover:text-red-800 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+    @endif
     <div class="container mx-auto px-6">
         <div class="max-w-md mx-auto bg-white bg-opacity-5 rounded-xl p-8 border border-gold border-opacity-20">
             <h2 class="text-3xl font-bold text-gold text-center mb-8">Connexion</h2>
@@ -95,6 +118,30 @@
                 event.preventDefault();
             }
         });
+
+
+        // Animation d'entrée depuis la droite
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                const notification = document.getElementById('error-notification');
+                notification.classList.remove('translate-x-full');
+            }, 100);
+
+            // Fermeture automatique après 5 secondes
+            setTimeout(function () {
+                closeNotification();
+            }, 5000);
+        });
+
+        function closeNotification() {
+            const notification = document.getElementById('error-notification');
+            notification.classList.add('translate-x-full');
+
+            // Supprimer complètement après la transition
+            setTimeout(function () {
+                notification.remove();
+            }, 500);
+        }
     </script>
 </body>
 

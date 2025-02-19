@@ -102,6 +102,29 @@
         </div>
     </nav>
 
+    @if (session('success'))
+        <div id="success-notification"
+            class="fixed top-24 right-0 transform translate-x-full bg-green-600 text-white px-6 py-4 rounded-l-lg shadow-lg border-l-4 border-gold flex items-center z-50 transition-transform duration-500 ease-out">
+            <div class="text-gold mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <div>
+                <p class="font-bold">Succès!</p>
+                <p>{{ session('success') }}</p>
+            </div>
+            <button onclick="closeNotification()" class="ml-6 text-white hover:text-gold focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+    @endif
+
     <!-- Header Section -->
     <header class="container mx-auto px-6 py-12 text-center">
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-20">Recettes du Ramadan</h1>
@@ -124,98 +147,109 @@
     <!-- Filters Section -->
     <section class="container mx-auto px-6 py-8">
         <!-- Categories -->
-        <div class="flex flex-wrap gap-4 mb-8">
-            <a href="#"
-                class="category-btn active px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                Tous
-            </a>
-            <a href="#"
-                class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                Entrées
-            </a>
-            <a href="#"
-                class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                Plats Principaux
-            </a>
-            <a href="#"
-                class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                Desserts
-            </a>
-            <a href="#"
-                class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                Boissons
-            </a>
+        <div class="flex justify-between mb-8">
+            <div class="flex flex-wrap gap-4">
+                <a href="#"
+                    class="category-btn active px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
+                    Tous
+                </a>
+                <a href="#"
+                    class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
+                    Entrées
+                </a>
+                <a href="#"
+                    class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
+                    Plats Principaux
+                </a>
+                <a href="#"
+                    class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
+                    Desserts
+                </a>
+                <a href="#"
+                    class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
+                    Boissons
+                </a>
+            </div>
+            <div class="flex items-center">
+                @auth
+                    <a href="{{ route('add_recette') }}"
+                        class="bg-gold text-[#0A2F1F] px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                        Ajouter une recette
+                    </a>
+                @else
+                    <a href="/login"
+                        class="bg-gold text-[#0A2F1F] px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition">
+                        Se connecter pour ajouter une recette
+                    </a>
+                @endauth
+            </div>
         </div>
 
         <!-- Recipe Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
             <!-- Recipe Card 1 -->
-            <div class="bg-white bg-opacity-5 rounded-xl overflow-hidden card-hover">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Harira_vegetarisch.jpg/420px-Harira_vegetarisch.jpg"
-                    alt="Harira" class="w-full h-48 object-cover" />
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-gold text-xl font-bold">Harira Traditionnelle</h3>
-                        <span class="bg-gold text-[#0A2F1F] px-3 py-1 rounded-full text-sm">Soupe</span>
-                    </div>
-                    <p class="text-gray-300 mb-4">Soupe traditionnelle marocaine parfaite pour l'iftar...</p>
-                    <div class="flex items-center justify-between text-sm text-gray-300">
-                        <div class="flex items-center space-x-4">
-                            <span>⏱️ 45 mins</span>
 
+            @foreach ($recettes as $recette)
+
+                <div class="bg-white bg-opacity-5 rounded-xl overflow-hidden card-hover">
+                    <img src="{{ $recette->image_url }}" alt="Harira" class="w-full h-48 object-cover" />
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-gold text-xl font-bold">{{ $recette->titre }}</h3>
+                            <span
+                                class="bg-gold text-[#0A2F1F] px-3 py-1 rounded-full text-sm">{{ $recette->categorie->nom_categorie }}</span>
                         </div>
-                    </div>
-                    <button class="w-full mt-4 py-2 bg-gold text-[#0A2F1F] rounded-full font-bold hover:bg-opacity-90">
-                        Voir la recette
-                    </button>
-                </div>
-            </div>
+                        <p class="text-gray-300 mb-4">{{ Str::limit($recette->description, 50) }}</p>
+                        <div class="flex items-center justify-between text-sm text-gray-300">
+                            <div class="flex items-center space-x-4">
+                                <span class="font-bold text-gold">{{ $recette->user->name }}</span>
 
-            <!-- Recipe Card 2 -->
-            <div class="bg-white bg-opacity-5 rounded-xl overflow-hidden card-hover">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Harira_vegetarisch.jpg/420px-Harira_vegetarisch.jpg"
-                    alt="Chebakia" class="w-full h-48 object-cover" />
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-gold text-xl font-bold">Chebakia</h3>
-                        <span class="bg-gold text-[#0A2F1F] px-3 py-1 rounded-full text-sm">Dessert</span>
-                    </div>
-                    <p class="text-gray-300 mb-4">Pâtisserie marocaine en forme de fleur, parfumée au miel...</p>
-                    <div class="flex items-center justify-between text-sm text-gray-300">
-                        <div class="flex items-center space-x-4">
-                            <span>⏱️ 120 mins</span>
-
+                            </div>
                         </div>
+                        <a href="/recettes/details/{{ $recette->id_recettes }}">
+                            <button
+                                class="w-full mt-4 py-2 bg-gold text-[#0A2F1F] rounded-full font-bold hover:bg-opacity-90">
+                                Voir la recette
+                            </button>
+                        </a>
                     </div>
-                    <button class="w-full mt-4 py-2 bg-gold text-[#0A2F1F] rounded-full font-bold hover:bg-opacity-90">
-                        Voir la recette
-                    </button>
                 </div>
-            </div>
+            @endforeach
 
-            <!-- Recipe Card 3 -->
-            <div class="bg-white bg-opacity-5 rounded-xl overflow-hidden card-hover">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Harira_vegetarisch.jpg/420px-Harira_vegetarisch.jpg"
-                    alt="Jus de Dates" class="w-full h-48 object-cover" />
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-gold text-xl font-bold">Jus de Dates</h3>
-                        <span class="bg-gold text-[#0A2F1F] px-3 py-1 rounded-full text-sm">Boisson</span>
-                    </div>
-                    <p class="text-gray-300 mb-4">Boisson rafraîchissante et énergisante pour l'iftar...</p>
-                    <div class="flex items-center justify-between text-sm text-gray-300">
-                        <div class="flex items-center space-x-4">
-                            <span>⏱️ 15 mins</span>
+            <!-- Pagination -->
 
-                        </div>
-                    </div>
-                    <button class="w-full mt-4 py-2 bg-gold text-[#0A2F1F] rounded-full font-bold hover:bg-opacity-90">
-                        Voir la recette
-                    </button>
-                </div>
-            </div>
+
+
+        </div>
+        <div class="mt-12 flex justify-center">
+            {{ $recettes->links('vendor.pagination.custom') }}
         </div>
     </section>
+
+    <script>
+        // Animation d'entrée depuis la droite
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                const notification = document.getElementById('success-notification');
+                notification.classList.remove('translate-x-full');
+            }, 100);
+
+            // Fermeture automatique après 5 secondes
+            setTimeout(function () {
+                closeNotification();
+            }, 5000);
+        });
+
+        function closeNotification() {
+            const notification = document.getElementById('success-notification');
+            notification.classList.add('translate-x-full');
+
+            // Supprimer complètement après la transition
+            setTimeout(function () {
+                notification.remove();
+            }, 500);
+        }
+    </script>
 </body>
 
 </html>
