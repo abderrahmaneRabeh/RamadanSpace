@@ -106,7 +106,6 @@
         </div>
     </nav>
 
-
     <!-- Hero Section -->
     <section id="accueil" class="min-h-screen flex items-center justify-center hero-gradient">
         <div class="container mx-auto px-6 py-24 text-center">
@@ -128,6 +127,29 @@
                 </a>
             </div>
         </div>
+
+        @if (session('success'))
+            <div id="success-notification"
+                class="fixed top-24 right-0 transform translate-x-full bg-green-600 text-white px-6 py-4 rounded-l-lg shadow-lg border-l-4 border-gold flex items-center z-50 transition-transform duration-500 ease-out">
+                <div class="text-gold mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-bold">Succès!</p>
+                    <p>{{ session('success') }}</p>
+                </div>
+                <button onclick="closeNotification()" class="ml-6 text-white hover:text-gold focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        @endif
     </section>
 
     <!-- Experiences Section -->
@@ -295,6 +317,30 @@
             });
         };
         window.addEventListener('scroll', animateOnScroll);
+
+
+        // Animation d'entrée depuis la droite
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                const notification = document.getElementById('success-notification');
+                notification.classList.remove('translate-x-full');
+            }, 100);
+
+            // Fermeture automatique après 5 secondes
+            setTimeout(function () {
+                closeNotification();
+            }, 5000);
+        });
+
+        function closeNotification() {
+            const notification = document.getElementById('success-notification');
+            notification.classList.add('translate-x-full');
+
+            // Supprimer complètement après la transition
+            setTimeout(function () {
+                notification.remove();
+            }, 500);
+        }
     </script>
 </body>
 

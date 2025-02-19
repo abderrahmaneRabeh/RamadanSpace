@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\RecetteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +23,8 @@ Route::get('/', function () {
 
 Route::get('/ExDetails/{id}', [ExperienceController::class, 'showDetails'])->name('ex_details');
 
-Route::get('/Recettes', function () {
-    return view('Recettes');
-});
+Route::get('/Recettes', [RecetteController::class, 'display'])->name('Recettes');
+Route::get('/recettes/details/{id}', [RecetteController::class, 'showDetails'])->name('re_details');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -50,3 +50,8 @@ Route::post('/experience/create', [ExperienceController::class, 'store']);
 
 
 Route::post('/AjouterCommentaire', [CommentaireController::class, 'store'])->name('AjouterCommentaire');
+
+
+
+Route::get('/recette/create', [RecetteController::class, 'index'])->name('add_recette');
+Route::post('/recette/create', [RecetteController::class, 'store']);
