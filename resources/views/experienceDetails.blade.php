@@ -178,10 +178,17 @@
                                     class="w-full p-4 rounded-xl bg-white bg-opacity-5 border border-gold border-opacity-20 text-white focus:outline-none focus:border-gold"
                                     placeholder="Partagez votre réaction..." name="commentaire" rows="3"></textarea>
                                 <input type="hidden" name="publication_id" value="{{ $publication->id_pub }}">
-                                <button type="submit"
-                                    class="mt-2 px-6 py-2 bg-gold text-dark-green rounded-full font-medium hover:bg-opacity-90">
-                                    Commenter
-                                </button>
+                                @auth
+                                    <button type="submit"
+                                        class="mt-2 px-6 py-2 bg-gold text-dark-green rounded-full font-medium hover:bg-opacity-90">
+                                        Commenter
+                                    </button>
+                                @else
+                                    <a href="{{ route('login') }}"
+                                        class="mt-2 inline-block px-6 py-2 rounded-full border border-gold border-opacity-20 bg-white bg-opacity-10 text-gold hover:bg-opacity-20 focus:outline-none">
+                                        Se connecter pour commenter
+                                    </a>
+                                @endauth
                             </div>
                         </div>
                     </div>

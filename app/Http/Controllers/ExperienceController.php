@@ -11,8 +11,7 @@ class ExperienceController extends Controller
 
     public function display()
     {
-        $publications = Publication::with('user')->get();
-
+        $publications = Publication::with('user')->paginate(3);
         return view('Experiences', compact('publications'));
     }
 

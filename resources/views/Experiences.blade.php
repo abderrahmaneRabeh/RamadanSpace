@@ -170,27 +170,7 @@
 
             <!-- Pagination -->
             <div class="mt-12 flex justify-center">
-                <nav class="inline-flex rounded-md shadow">
-                    <a href="#"
-                        class="px-4 py-2 text-sm font-medium text-gold bg-white bg-opacity-10 rounded-l-md hover:bg-opacity-20">
-                        Précédent
-                    </a>
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-gold bg-white bg-opacity-20">
-                        1
-                    </a>
-                    <a href="#"
-                        class="px-4 py-2 text-sm font-medium text-gold bg-white bg-opacity-10 hover:bg-opacity-20">
-                        2
-                    </a>
-                    <a href="#"
-                        class="px-4 py-2 text-sm font-medium text-gold bg-white bg-opacity-10 hover:bg-opacity-20">
-                        3
-                    </a>
-                    <a href="#"
-                        class="px-4 py-2 text-sm font-medium text-gold bg-white bg-opacity-10 rounded-r-md hover:bg-opacity-20">
-                        Suivant
-                    </a>
-                </nav>
+                {{ $publications->links('vendor.pagination.custom') }}
             </div>
         </div>
     </section>
