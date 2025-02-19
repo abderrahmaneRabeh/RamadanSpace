@@ -19,6 +19,16 @@
             background-image: url('data:image/svg+xml,<svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M25 0l25 25-25 25L0 25z" fill="%23D4AF37" fill-opacity="0.05"/></svg>');
         }
 
+        ::-webkit-scrollbar {
+            width: 10px;
+            background-color: var(--primary-gold);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--secondary-gold);
+            border-radius: 10px;
+        }
+
         .card-hover {
             transition: all 0.3s ease;
         }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExperienceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,10 +40,13 @@ Route::get(
     action: function () {
         return view('Experiences');
     },
-);
+)->name('Experiences');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
+
+Route::get('/experience/create', [ExperienceController::class, 'index'])->name('add_experience');
+Route::post('/experience/create', [ExperienceController::class, 'store']);
