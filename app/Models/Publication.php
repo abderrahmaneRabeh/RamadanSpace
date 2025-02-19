@@ -23,4 +23,9 @@ class Publication extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    public function commentaires()
+    {
+        return $this->hasMany(Commentaire::class, 'id_pub');
+    }
 }
