@@ -6,6 +6,18 @@ Une plateforme en ligne dédiée au Ramadan 2025, permettant aux utilisateurs de
 ## 🎯 Objectif
 Créer un espace simple et interactif où chacun peut contribuer et découvrir du contenu inspirant autour du mois sacré du Ramadan.
 
+
+## 📷 Aperçu du Projet
+
+Voici quelques images illustrant notre plateforme de partage Ramadan 2025 :
+
+![Aperçu 1](./public/1.png)
+
+![Aperçu 2](./public/2.png)
+
+![Aperçu 3](./public/3.png)
+
+
 ## 🚀 Fonctionnalités principales
 
 ### 📿 Partage d'Expériences
@@ -65,18 +77,6 @@ cd ramadan-sharing-platform
 composer install
 npm install
 
-# Configurer les variables d'environnement
-cp .env.example .env
-php artisan key:generate
-
-# Configurer la base de données PostgreSQL dans .env
-# DB_CONNECTION=pgsql
-# DB_HOST=127.0.0.1
-# DB_PORT=5432
-# DB_DATABASE=ramadan_platform
-# DB_USERNAME=postgres
-# DB_PASSWORD=votre_mot_de_passe
-
 # Exécuter les migrations
 php artisan migrate
 
@@ -105,10 +105,4 @@ ramadan-platform/
 - **Phase 1**: Développement des fonctionnalités principales
 - **Phase 2**: Implémentation des fonctionnalités bonus
 - **Phase 3**: Tests utilisateurs et optimisations
-- **Phase 4**: Lancement officiel avant Ramadan 2025
 
-## 👥 Contribution
-Les contributions sont les bienvenues! N'hésitez pas à ouvrir une issue ou soumettre une pull request.
-
-## 📄 Licence
-Ce projet est sous licence MIT.
