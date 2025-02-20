@@ -64,9 +64,9 @@
             <div class="flex justify-between items-center">
                 <a href="/" class="text-2xl text-white font-bold">Ramadan<span class="text-gold">Space</span></a>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#accueil" class="text-gold hover:text-gold transition">Accueil</a>
-                    <a href="#experiences" class="text-white hover:text-gold transition">Expériences</a>
-                    <a href="#recettes" class="text-white hover:text-gold transition">Recettes</a>
+                    <a href="/" class="text-gold hover:text-gold transition">Accueil</a>
+                    <a href="/Experiences" class="text-white hover:text-gold transition">Expériences</a>
+                    <a href="/Recettes" class="text-white hover:text-gold transition">Recettes</a>
                 </div>
                 @auth
                     <div class="relative inline-block text-left">
@@ -152,94 +152,114 @@
         @endif
     </section>
 
-    <!-- Experiences Section -->
-    <section id="experiences" class="py-20">
+    <!-- Statistiques Section -->
+    <section id="statistiques" class="py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-gold text-center mb-16">Expériences Partagées</h2>
+            <h2 class="text-4xl font-bold text-gold text-center mb-16">Statistiques Globales</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Experience Card 1 -->
+                <!-- Total Publications Card -->
                 <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">📝</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Premier Jour de Ramadan</h3>
-                    <p class="text-gray-300">Une expérience spirituelle unique partagée par Ahmed...</p>
-                    <div class="mt-4 flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 2 jours</span>
-                        <a href="/ExDetails" class="text-gold hover:underline">Lire plus</a>
+                    <div class="text-gold text-4xl mb-4">📊</div>
+                    <h3 class="text-gold text-xl font-bold mb-4">Publications Totales</h3>
+                    <p class="text-gray-300">Nombre total d'expériences et récits partagés par notre communauté.</p>
+                    <div class="mt-6 flex justify-center">
+                        <span class="text-gold text-5xl font-bold"
+                            id="totalPublications">{{ $totalPublications }}</span>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <span class="text-green-400 text-sm">↑ 12% ce mois-ci</span>
                     </div>
                 </div>
 
-                <!-- Experience Card 2 -->
+                <!-- Active Users Card -->
                 <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">🌙</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Nuit du Destin</h3>
-                    <p class="text-gray-300">Témoignage spirituel sur la Laylat al-Qadr...</p>
-                    <div class="mt-4 flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 3 jours</span>
-                        <button class="text-gold hover:underline">Lire plus</button>
+                    <div class="text-gold text-4xl mb-4">👥</div>
+                    <h3 class="text-gold text-xl font-bold mb-4">Utilisateurs Actifs</h3>
+                    <p class="text-gray-300">Membres actifs partageant leurs expériences pendant ce Ramadan.</p>
+                    <div class="mt-6 flex justify-center">
+                        <span class="text-gold text-5xl font-bold" id="activeUsers">{{ $totalUsers }}</span>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <span class="text-green-400 text-sm">↑ 8% cette semaine</span>
                     </div>
                 </div>
 
-                <!-- Experience Card 3 -->
+                <!-- Daily Views Card -->
                 <div class="bg-white bg-opacity-5 rounded-xl p-6 card-hover border border-gold border-opacity-20">
-                    <div class="text-gold text-4xl mb-4">🕌</div>
-                    <h3 class="text-gold text-xl font-bold mb-4">Prière en Communauté</h3>
-                    <p class="text-gray-300">L'importance des prières de Tarawih...</p>
-                    <div class="mt-4 flex justify-between items-center">
-                        <span class="text-gold text-sm">Il y a 4 jours</span>
-                        <button class="text-gold hover:underline">Lire plus</button>
+                    <div class="text-gold text-4xl mb-4">👁️</div>
+                    <h3 class="text-gold text-xl font-bold mb-4">Recette Total</h3>
+                    <p class="text-gray-300">Nombre total de vues par jour sur les recettes partagées.</p>
+                    <div class="mt-6 flex justify-center">
+                        <span class="text-gold text-5xl font-bold" id="dailyViews">{{ $totalRecettes }}</span>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <span class="text-green-400 text-sm">↑ 15% depuis la semaine dernière</span>
                     </div>
                 </div>
-            </div>
-            <div class="text-center mt-16">
-                <a href="/Experiences"
-                    class="bg-gold text-dark-green px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition">Voir
-                    toutes les expériences</a>
             </div>
         </div>
     </section>
 
-    <!-- Recipes Section -->
-    <section id="recettes" class="py-20 bg-white bg-opacity-5">
+    <!-- Recettes Populaires Section -->
+    <section id="recettes-populaires" class="py-20 bg-white bg-opacity-5">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-gold text-center mb-16">Recettes Populaires</h2>
+            <h2 class="text-4xl font-bold text-gold text-center mb-16">Recettes les Plus Populaires</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Recipe Card 1 -->
+                <!-- Popular Recipe Card 1 -->
                 <div class="rounded-xl overflow-hidden card-hover">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Harira_vegetarisch.jpg/420px-Harira_vegetarisch.jpg"
                         alt="Harira" class="w-full h-48 object-cover" />
                     <div class="p-6 bg-white bg-opacity-5 border border-gold border-opacity-20">
                         <h3 class="text-gold text-xl font-bold mb-2">Harira Traditionnelle</h3>
-                        <p class="text-gray-300 mb-4">Soupe traditionnelle marocaine pour l'iftar...</p>
+                        <p class="text-gray-300 mb-4">La recette la plus consultée ce Ramadan</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-gold">⏱️ 45 mins</span>
+                            <span class="text-gold flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg> 5,842 vues</span>
                             <button class="text-gold hover:underline">Voir la recette</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Recipe Card 2 -->
+                <!-- Popular Recipe Card 2 -->
                 <div class="rounded-xl overflow-hidden card-hover">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Harira_vegetarisch.jpg/420px-Harira_vegetarisch.jpg"
                         alt="Dates" class="w-full h-48 object-cover" />
                     <div class="p-6 bg-white bg-opacity-5 border border-gold border-opacity-20">
                         <h3 class="text-gold text-xl font-bold mb-2">Dattes Farcies</h3>
-                        <p class="text-gray-300 mb-4">Dattes délicieuses pour le suhoor...</p>
+                        <p class="text-gray-300 mb-4">Deuxième recette la plus consultée</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-gold">⏱️ 20 mins</span>
+                            <span class="text-gold flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg> 4,217 vues</span>
                             <button class="text-gold hover:underline">Voir la recette</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Recipe Card 3 -->
+                <!-- Popular Recipe Card 3 -->
                 <div class="rounded-xl overflow-hidden card-hover">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Harira_vegetarisch.jpg/420px-Harira_vegetarisch.jpg"
                         alt="Chorba" class="w-full h-48 object-cover" />
                     <div class="p-6 bg-white bg-opacity-5 border border-gold border-opacity-20">
                         <h3 class="text-gold text-xl font-bold mb-2">Chorba Ftour</h3>
-                        <p class="text-gray-300 mb-4">Soupe traditionnelle algérienne...</p>
+                        <p class="text-gray-300 mb-4">Troisième recette la plus consultée</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-gold">⏱️ 60 mins</span>
+                            <span class="text-gold flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg> 3,678 vues</span>
                             <button class="text-gold hover:underline">Voir la recette</button>
                         </div>
                     </div>
@@ -341,6 +361,50 @@
                 notification.remove();
             }, 500);
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fonction pour animer les compteurs
+            function animateCounter(elementId, finalValue, duration) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+
+                let startValue = 0;
+                const increment = finalValue > 1000 ? 10 : 1;
+                const stepTime = Math.abs(Math.floor(duration / (finalValue / increment)));
+
+                const formatNumber = (num) => {
+                    return num > 999 ? (num / 1000).toFixed(1) + ',' + (num % 1000).toString().padStart(3, '0') : num;
+                };
+
+                const timer = setInterval(function () {
+                    startValue += increment;
+                    element.textContent = formatNumber(startValue);
+                    if (startValue >= finalValue) {
+                        element.textContent = formatNumber(finalValue);
+                        clearInterval(timer);
+                    }
+                }, stepTime);
+            }
+
+            // Observer pour déclencher l'animation quand la section est visible
+            // const observer = new IntersectionObserver((entries) => {
+            //     entries.forEach(entry => {
+            //         if (entry.isIntersecting) {
+            //             animateCounter('totalPublications', 324, 2000);
+            //             animateCounter('activeUsers', 127, 2000);
+            //             animateCounter('dailyViews', 1542, 2000);
+            //             observer.unobserve(entry.target);
+            //         }
+            //     });
+            // }, { threshold: 0.2 });
+
+            // Observer la section de statistiques
+            const statsSection = document.getElementById('statistiques');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
     </script>
 </body>
 

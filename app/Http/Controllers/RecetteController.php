@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Recette;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,9 @@ class RecetteController extends Controller
 {
     public function index()
     {
-        return view('AjouterRecette');
+
+        $categories = Categorie::all();
+        return view('AjouterRecette', compact('categories'));
     }
 
     public function store(Request $request)
@@ -52,10 +55,27 @@ class RecetteController extends Controller
 
     }
 
-    public function display()
+    public function display($categoryId = null)
     {
-        $recettes = Recette::with('user', 'categorie')->orderBy('created_at', 'desc')->paginate(3);
-        return view('Recettes', compact('recettes'));
+
+        $query = Recette::with('user', 'categorie')->orderBy('created_at', 'desc');
+
+        if ($categoryId) {
+            $query->whereHas('categorie', function ($q) use ($categoryId) {
+                $q->where('id_categorie', $categoryId);
+            });
+        }
+
+        if ($categoryId) {
+
+            $recettes = $query->paginate(3);
+        } else {
+
+            $recettes = $query->paginate(6);
+        }
+        $categories = Categorie::all();
+
+        return view('Recettes', compact('recettes', 'categories', 'categoryId'));
     }
 
     public function showDetails($id)

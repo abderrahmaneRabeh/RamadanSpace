@@ -186,9 +186,12 @@
                                     <label for="id_category"
                                         class="block text-gold font-semibold mb-2">Catégorie</label>
                                     <select id="id_category" name="id_category" required
-                                        class="w-full bg-white bg-opacity-10 text-white border border-gold border-opacity-30 rounded-lg px-4 py-3 focus:outline-none form-input">
+                                        class="w-full bg-gold bg-opacity-10 text-white border border-gold border-opacity-30 rounded-lg px-4 py-3 focus:outline-none form-input">
                                         <option value="">Sélectionnez une catégorie</option>
-                                        <option value="1">any</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id_categorie }}">{{ $category->nom_categorie }}
+                                            </option>
+                                        @endforeach
 
                                     </select>
                                     <span id="categoryError" class="text-red-400 text-sm hidden">La catégorie est

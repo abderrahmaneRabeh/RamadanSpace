@@ -149,26 +149,33 @@
         <!-- Categories -->
         <div class="flex justify-between mb-8">
             <div class="flex flex-wrap gap-4">
-                <a href="#"
-                    class="category-btn active px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                    Tous
-                </a>
-                <a href="#"
-                    class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                    Entrées
-                </a>
-                <a href="#"
-                    class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                    Plats Principaux
-                </a>
-                <a href="#"
-                    class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                    Desserts
-                </a>
-                <a href="#"
-                    class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
-                    Boissons
-                </a>
+                @if (isset($categoryId))
+                    <a href="/Recettes"
+                        class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
+                        tout
+                    </a>
+                @else
+                    <a href="/Recettes"
+                        class="category-btn active px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
+                        tout
+                    </a>
+                @endif
+
+                @foreach ($categories as $category)
+                    @if ($category->id_categorie == $categoryId)
+                        <a href="/Recettes/{{ $category->id_categorie }}"
+                            class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F] active">
+                            {{ $category->nom_categorie }}
+                        </a>
+                    @else
+                        <a href="/Recettes/{{ $category->id_categorie }}"
+                            class="category-btn px-6 py-2 rounded-full border border-gold text-gold hover:bg-gold hover:text-[#0A2F1F]">
+                            {{ $category->nom_categorie }}
+                        </a>
+                    @endif
+                @endforeach
+
+
             </div>
             <div class="flex items-center">
                 @auth

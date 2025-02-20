@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecetteController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,13 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/ExDetails/{id}', [ExperienceController::class, 'showDetails'])->name('ex_details');
 
-Route::get('/Recettes', [RecetteController::class, 'display'])->name('Recettes');
+Route::get('/Recettes/{category?}', [RecetteController::class, 'display'])->name('Recettes');
 Route::get('/recettes/details/{id}', [RecetteController::class, 'showDetails'])->name('re_details');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

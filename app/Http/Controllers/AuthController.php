@@ -33,7 +33,7 @@ class AuthController extends Controller
 
             Auth::login($user);
 
-            return redirect()->route('home');
+            return redirect()->route('home')->with('success', 'Registration successful');
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             dd($e->errors());
