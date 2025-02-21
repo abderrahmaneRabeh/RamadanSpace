@@ -53,4 +53,5 @@ class ExperienceController extends Controller
             echo "Une erreur s'est produite lors de l'ajout de la publication.";
         }
     }
+
 }
